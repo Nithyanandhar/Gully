@@ -3,6 +3,7 @@ import createJWT from "../utils/createJWT.js";
 import validator from "validator"
 import Users from "../models/Users.js";
 import bcrypt from "bcrypt"
+import auth from "../utils/auth.js";
 
 const authRouter = express.Router();
 
@@ -123,6 +124,19 @@ authRouter.post("/login",async (req,res)=>{
                 from : "authRouter/login"
             })
     }
+})
+
+authRouter.get("/logout",auth,async (req,res)=>{
+    res
+        .clearCookie("token", {
+            httpOnly: true,
+            secure: false,
+            sameSite: "lax",
+            path: "/"
+        })
+        .json({
+            message : "Logout successful"
+        })
 })
 
 export default authRouter;

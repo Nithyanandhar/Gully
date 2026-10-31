@@ -4,7 +4,7 @@ import Home from './pages/Home'
 import Auth from './pages/Auth'
 import axios from 'axios'
 import { useDispatch } from 'react-redux'
-import { setUser } from './slices/userSlice'
+import { deleteUser, setUser } from './slices/userSlice'
 
 
 const App = () => {
@@ -13,17 +13,20 @@ const App = () => {
 
     useEffect(()=>{
         const fetchUser = async ()=>{
-            try{
-                console.log("hello")
-                const user =await axios.get("http://localhost:3000/getuser/user", {
-                    withCredentials: true
-                });
-                console.log("hello")
-                console.log(user.data)
-                dispatch(setUser(user.data.user));
+            if(document.cookie){
+
+                try{
+                    const user =await axios.get("http://localhost:3000/getuser/user", {
+                        withCredentials: true
+                    });
+                    dispatch(setUser(user.data.user));
+                }
+                catch(error){
+                    console.log(`${error.message}`)
+                }
             }
-            catch(error){
-                console.log(`${error.message}`)
+            else{
+                dispatch(deleteUser({user : "hello"}))
             }
         }
         fetchUser();
