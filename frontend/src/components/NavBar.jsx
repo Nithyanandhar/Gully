@@ -1,7 +1,11 @@
 import React from 'react'
 import { Link } from "react-router-dom"
+import { useSelector } from 'react-redux'
 
 const NavBar = () => {
+
+    const user = useSelector((store)=>store.userInfo.user)
+    console.log(user.username);
     return (
         <div>
             <div>
@@ -18,7 +22,10 @@ const NavBar = () => {
                     </div>
                 </div>
                 <div>
-                    <Link to="/auth">Login / Signup</Link> 
+                    {
+                        user ? <p>{user.username}</p> : <Link to="/auth">Login / Signup</Link> 
+                    }
+                    
                 </div>
             </div>
         </div>

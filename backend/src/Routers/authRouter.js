@@ -53,7 +53,7 @@ authRouter.post("/signup",async (req,res)=>{
             email : userEmail,
             password : encryptedpass
         })
-        user.save();
+        await user.save();
 
 
         const token = createJWT(userEmail);
@@ -68,8 +68,9 @@ authRouter.post("/signup",async (req,res)=>{
 
 
         return res
-                .cookie("auth",token,"1h")
+                .cookie("token",token,"1h")
                 .json({
+                    user : user,
                     message : "Signned in successfully"
                 })
     }
@@ -107,8 +108,9 @@ authRouter.post("/login",async (req,res)=>{
         const token = await createJWT(user.email);
         console.log(token)
         res
-            .cookie("auth",token,"1h")
+            .cookie("token",token,"1h")
             .json({
+                user : user,
                 message : "loggin successsful",
                 from : "authRouter"
             })

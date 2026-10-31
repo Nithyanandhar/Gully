@@ -5,6 +5,8 @@ import authRouter from "./Routers/authRouter.js";
 import cookieParser from "cookie-parser"
 import homeRouter from "./Routers/homeRouter.js";
 import cors from "cors";
+import userRouter from "./Routers/userRouter.js";
+
 
 const app = express();
 
@@ -16,8 +18,8 @@ app.use(cookieParser());
 app.use(express.json());
 
 app.use("/auth/",authRouter)
+app.use("/getuser/",userRouter)
 app.use("/",homeRouter)
-
 
 connectDB()
     .then(()=>{

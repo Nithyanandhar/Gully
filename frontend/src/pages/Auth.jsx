@@ -4,10 +4,11 @@ import { useForm } from "react-hook-form"
 import { z } from "zod"
 import { zodResolver } from "@hookform/resolvers/zod"
 import axios from "axios"
-
+import { useDispatch } from 'react-redux'
+import { setUser } from '../slices/userSlice'
 
 const Auth = () => {
-
+    const dispatch = useDispatch();
     const navigate = useNavigate();
     const [signup , setSignup] = useState(false);
 
@@ -45,7 +46,9 @@ const Auth = () => {
                 data,
                 {withCredentials: true}
             );
-            if(response.status===200)navigate("/");
+            console.log(response.data.user)
+            dispatch(setUser(response.data.user));
+            if(response.status===200 || response.status===201)navigate("/");
 
         }
         catch(error){
