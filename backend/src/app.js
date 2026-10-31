@@ -3,13 +3,21 @@ import "dotenv/config.js"
 import connectDB from "./connection/db.js";
 import authRouter from "./Routers/authRouter.js";
 import cookieParser from "cookie-parser"
+import homeRouter from "./Routers/homeRouter.js";
+import cors from "cors";
 
 const app = express();
 
+app.use(cors({
+    origin : "http://localhost:5173",
+    credentials: true
+}))
 app.use(cookieParser());
 app.use(express.json());
 
 app.use("/auth/",authRouter)
+app.use("/",homeRouter)
+
 
 connectDB()
     .then(()=>{

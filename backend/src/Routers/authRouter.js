@@ -21,6 +21,14 @@ authRouter.post("/signup",async (req,res)=>{
                     from : "authRouter / signup"
                 })
         }
+        if(await Users.findOne({username : username})){
+            return res 
+                .status(409)
+                .json({
+                    message : "Username already exist",
+                    from : "authRouter / signup"
+                })
+        }
         if(!validator.isEmail(userEmail)){
             return res
                 .status(400)
