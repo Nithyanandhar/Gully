@@ -6,6 +6,7 @@ import cookieParser from "cookie-parser"
 import homeRouter from "./Routers/homeRouter.js";
 import cors from "cors";
 import userRouter from "./Routers/userRouter.js";
+import statsRouter from "./Routers/statsRouter.js";
 
 
 const app = express();
@@ -19,6 +20,7 @@ app.use(express.json());
 
 app.use("/auth/",authRouter)
 app.use("/getuser/",userRouter)
+app.use("/stats/",statsRouter)
 app.use("/",homeRouter)
 
 connectDB()
