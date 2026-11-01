@@ -1,4 +1,5 @@
 import express from "express";
+import cache from "../middleware/cache.js";
 
 const homeRouter = express.Router();
 

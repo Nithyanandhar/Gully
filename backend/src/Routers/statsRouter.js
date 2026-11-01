@@ -1,9 +1,10 @@
 import axios from "axios";
 import express from "express"
+import cache from "../middleware/cache.js";
 
 const statsRouter = express.Router();
 
-statsRouter.post("/player", async(req,res)=>{
+statsRouter.post("/player", cache(24*60),async(req,res)=>{
     try{
         const player = req.body.player;
         const response = await axios.get(`https://api.cricketdatabase.com/v1/players/${player}/stats`,

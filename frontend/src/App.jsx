@@ -6,6 +6,7 @@ import axios from 'axios'
 import { useDispatch } from 'react-redux'
 import { deleteUser, setUser } from './slices/userSlice'
 import Stats from './pages/Stats'
+import Teams from './pages/Teams'
 
 
 const App = () => {
@@ -40,6 +41,7 @@ const App = () => {
                     <Route path = "/" element= {<Home/>}/>
                     <Route path = "/auth" element= {<Auth/>}/>
                     <Route path = "/stats" element= {<Stats/>}/>
+                    <Route path = "/teams" element= {<Teams/>}/>
                 </Routes>
 
         </BrowserRouter>

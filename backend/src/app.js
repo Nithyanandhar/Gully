@@ -1,12 +1,15 @@
 import express from "express";
 import "dotenv/config.js"
-import connectDB from "./connection/db.js";
+import connectDB from "./config/db.js";
 import authRouter from "./Routers/authRouter.js";
 import cookieParser from "cookie-parser"
 import homeRouter from "./Routers/homeRouter.js";
 import cors from "cors";
 import userRouter from "./Routers/userRouter.js";
 import statsRouter from "./Routers/statsRouter.js";
+import teamsRouter from "./Routers/teamsRouter.js";
+import recordRouter from "./Routers/recordRouter.js";
+import latestRouter from "./Routers/latestRouter.js";
 
 
 const app = express();
@@ -21,7 +24,9 @@ app.use(express.json());
 app.use("/auth/",authRouter)
 app.use("/getuser/",userRouter)
 app.use("/stats/",statsRouter)
-app.use("/",homeRouter)
+app.use("/teams/",teamsRouter)
+app.use("/records/",recordRouter)
+app.use("/",homeRouter,latestRouter)
 
 connectDB()
     .then(()=>{

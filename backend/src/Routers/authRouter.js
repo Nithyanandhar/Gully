@@ -3,7 +3,7 @@ import createJWT from "../utils/createJWT.js";
 import validator from "validator"
 import Users from "../models/Users.js";
 import bcrypt from "bcrypt"
-import auth from "../utils/auth.js";
+import auth from "../middleware/auth.js";
 
 const authRouter = express.Router();
 
@@ -107,7 +107,7 @@ authRouter.post("/login",async (req,res)=>{
         }
 
         const token = await createJWT(user.email);
-        console.log(token)
+        
         res
             .cookie("token",token,"1h")
             .json({
