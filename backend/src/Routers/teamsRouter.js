@@ -48,10 +48,28 @@ teamsRouter.get("/:team",async (req,res)=>{
 
 teamsRouter.get("/",async (req,res)=>{
     try{    
+        
+        const key = `db:teams`
 
+        const teamdbcache = await Teams.findOne({ key : key})
+        if(teamdbcache){
+            return res 
+                .json({
+                    data : teamdbcache.data,
+                    from : "teamsRouter // retrived from db cache"
+
+                })
+        }
         const response = await axios.get("https://api.cricketdatabase.com/v1/teams", {
             headers: { Authorization: process.env.CRICKET_API },
         });
+
+        const teamsdb = new Teams({
+            key : key,
+            data : response.data
+        })
+
+        teamsdb.save();
 
         res
             .json({

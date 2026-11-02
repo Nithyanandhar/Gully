@@ -6,9 +6,15 @@ const recordRouter = express.Router();
 
 recordRouter.post("/",async(req,res)=>{
     try{
-        const format = req.body.format || "any"; //  test , odi , t20 ,multi-day ,one-day
-        const type = req.body.type || "any" ;  //  most-runs, most-wickets, highest-scores, best-bowling,team-totals
-        const gender = req.body.gender || "any"   // male ,female, any
+        const format = req.body.format; //  test , odi , t20 ,multi-day ,one-day
+        const type = req.body.type;  //  most-runs, most-wickets, highest-scores, best-bowling,team-totals
+        const gender = req.body.gender;  // male ,female, any
+
+        let url = ""
+
+        if(type)url+=`type=${type}&`
+        if(format)url+=`format=${format}&`
+        if(gender)url+=`gender=${gender}`
 
         const key = `db:records:${format}:${type}:${gender}`
 
@@ -21,7 +27,7 @@ recordRouter.post("/",async(req,res)=>{
                     from : "recordRouter // RETRIEVED FROM THE DB CACHE"
                 })
         }
-        const response = await axios.get(`https://api.cricketdatabase.com/v1/records?type=${type}&format=${format}&gender=${gender}`, {
+        const response = await axios.get(`https://api.cricketdatabase.com/v1/records?${url}`, {
                 headers: { Authorization: process.env.CRICKET_API }, });
 
         const recordsData = new Records({

@@ -74,58 +74,162 @@ const Auth = () => {
 
 
   return (
-    <div>
-        <div>
-            <form onSubmit={handleSubmit(onSubmit, (errors) => console.log(errors))}>
-                {
-                    signup ? <div>Signup</div> :<div>Login</div>
-                }
+    // <div>
+    //     <div>
+    //         <form onSubmit={handleSubmit(onSubmit, (errors) => console.log(errors))}>
+    //             {
+    //                 signup ? <div>Signup</div> :<div>Login</div>
+    //             }
                 
-                {
-                    signup && 
-                    <>
-                        <label>Username</label>
-                        <input
-                            type="text"
-                            placeholder="Username"
-                            {...register("username")}
-                        />
-                        {errors.username && <p>{errors.username.message}</p>}
-                    </>
-                }
+    //             {
+    //                 signup && 
+    //                 <>
+    //                     <label>Username</label>
+    //                     <input
+    //                         type="text"
+    //                         placeholder="Username"
+    //                         {...register("username")}
+    //                     />
+    //                     {errors.username && <p>{errors.username.message}</p>}
+    //                 </>
+    //             }
                 
-                <label>Email</label>
-                <input
-                    type="email"
-                    placeholder="Email"
-                    {...register("email")}
-                />
+    //             <label>Email</label>
+    //             <input
+    //                 type="email"
+    //                 placeholder="Email"
+    //                 {...register("email")}
+    //             />
 
-                {errors.email && <p>{errors.email.message}</p>}
+    //             {errors.email && <p>{errors.email.message}</p>}
 
-                <label>Password</label>
-                <input
-                    type="password"
-                    placeholder="Password"
-                    {...register("password")}
-                />
-                {errors.password && <p>{errors.password.message}</p>}
+    //             <label>Password</label>
+    //             <input
+    //                 type="password"
+    //                 placeholder="Password"
+    //                 {...register("password")}
+    //             />
+    //             {errors.password && <p>{errors.password.message}</p>}
 
-                {
-                    signup ?
-                    <button>Register</button>  : <button>Login</button>
+    //             {
+    //                 signup ?
+    //                 <button>Register</button>  : <button>Login</button>
 
-                }       
-            </form>
-            <div>
-                {
-                    signup ?( <button type="button" onClick={() => setSignup(false)}>Login</button> ):
-                           ( <button type="button" onClick={() => setSignup(true)}>Register/Signup</button> )
-                }
+    //             }       
+    //         </form>
+    //         <div>
+    //             {
+    //                 signup ?( <button type="button" onClick={() => setSignup(false)}>Login</button> ):
+    //                        ( <button type="button" onClick={() => setSignup(true)}>Register/Signup</button> )
+    //             }
                 
+    //         </div>
+    //     </div>
+    // </div>
+   
+<div className="min-h-screen flex items-center justify-center bg-slate-950 px-4">
+    <div className="w-full max-w-md bg-slate-900 border border-slate-800 rounded-2xl p-8 shadow-2xl">
+
+        <form
+            className="flex flex-col gap-4"
+            onSubmit={handleSubmit(onSubmit, (errors) => console.log(errors))}
+        >
+            <div className="text-center mb-4">
+                <h1 className="text-3xl font-bold text-white">
+                    {signup ? "Create Account" : "Welcome Back"}
+                </h1>
+                <p className="text-slate-400 text-sm mt-2">
+                    {signup
+                        ? "Create your account to get started"
+                        : "Login to continue to your account"}
+                </p>
             </div>
+
+            {
+                signup &&
+                <>
+                    <label className="text-sm font-medium text-slate-300">
+                        Username
+                    </label>
+                    <input
+                        type="text"
+                        placeholder="Username"
+                        className="w-full bg-slate-800 border border-slate-700 rounded-lg px-4 py-3 text-white placeholder:text-slate-500 outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 transition"
+                        {...register("username")}
+                    />
+                    {errors.username && <p className="text-red-400 text-sm">{errors.username.message}</p>}
+                </>
+            }
+
+            <label className="text-sm font-medium text-slate-300">
+                Email
+            </label>
+            <input
+                type="email"
+                placeholder="Email"
+                className="w-full bg-slate-800 border border-slate-700 rounded-lg px-4 py-3 text-white placeholder:text-slate-500 outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 transition"
+                {...register("email")}
+            />
+
+            {errors.email && <p className="text-red-400 text-sm">{errors.email.message}</p>}
+
+            <label className="text-sm font-medium text-slate-300">
+                Password
+            </label>
+            <input
+                type="password"
+                placeholder="Password"
+                className="w-full bg-slate-800 border border-slate-700 rounded-lg px-4 py-3 text-white placeholder:text-slate-500 outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 transition"
+                {...register("password")}
+            />
+
+            {errors.password && <p className="text-red-400 text-sm">{errors.password.message}</p>}
+
+            {
+                signup ?
+                <button className="w-full bg-blue-600 hover:bg-blue-500 text-white font-semibold py-3 rounded-lg mt-3 transition duration-200 active:scale-[0.98]">
+                    Register
+                </button> :
+                <button className="w-full bg-blue-600 hover:bg-blue-500 text-white font-semibold py-3 rounded-lg mt-3 transition duration-200 active:scale-[0.98]">
+                    Login
+                </button>
+            }
+        </form>
+
+        <div className="mt-6 text-center">
+            {
+                signup
+                ? (
+                    <p className="text-slate-400 text-sm">
+                        Already have an account?{" "}
+                        <button
+                            type="button"
+                            className="text-blue-400 hover:text-blue-300 font-semibold transition"
+                            onClick={() => setSignup(false)}
+                        >
+                            Login
+                        </button>
+                    </p>
+                )
+                : (
+                    <p className="text-slate-400 text-sm">
+                        Don't have an account?{" "}
+                        <button
+                            type="button"
+                            className="text-blue-400 hover:text-blue-300 font-semibold transition"
+                            onClick={() => setSignup(true)}
+                        >
+                            Register
+                        </button>
+                    </p>
+                )
+            }
         </div>
+
     </div>
+</div>
+
+
   )
 }
 

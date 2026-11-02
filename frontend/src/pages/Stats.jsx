@@ -9,11 +9,11 @@ const Stats = () => {
         
         <div>
             <NavBar/>
-
+{/* 
             <div>
                 <div>Match Stats</div>
                 
-            </div>
+            </div> */}
 
             <PlayerStats/>
 
