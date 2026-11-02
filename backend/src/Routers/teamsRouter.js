@@ -1,19 +1,38 @@
 import express from "express";
 import axios from "axios"
-import cache from "../middleware/cache.js";
+import Teams from "../models/Teams.js";
 
 const teamsRouter = express.Router();
 
-teamsRouter.get("/:team",cache(24*60),async (req,res)=>{
+teamsRouter.get("/:team",async (req,res)=>{
     try{    
         const team = req.params.team;
+
+        const key = `db:teams:${team}`
+
+        const teamdbcache = await Teams.findOne({ key : key})
+        if(teamdbcache){
+            return res 
+                .json({
+                    data : teamdbcache.data,
+                    from : "teamsRouter // retrived from db cache"
+
+                })
+        }
         const response = await axios.get(`https://api.cricketdatabase.com/v1/teams/${team}`, {
             headers: { Authorization: process.env.CRICKET_API },
         });
+
+        const teamsdbdata = new Teams({
+            key : key,
+            data : response.data
+        })
+
+        teamsdbdata.save();
       
         res
             .json({
-                data  : response.data.data,
+                data  : response.data,
                 message : "Retrived from api",
                 from : "teamsRouter"
             })

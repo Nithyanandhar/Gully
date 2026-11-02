@@ -3,7 +3,6 @@ import "dotenv/config.js"
 import connectDB from "./config/db.js";
 import authRouter from "./Routers/authRouter.js";
 import cookieParser from "cookie-parser"
-import homeRouter from "./Routers/homeRouter.js";
 import cors from "cors";
 import userRouter from "./Routers/userRouter.js";
 import statsRouter from "./Routers/statsRouter.js";
@@ -26,7 +25,7 @@ app.use("/getuser/",userRouter)
 app.use("/stats/",statsRouter)
 app.use("/teams/",teamsRouter)
 app.use("/records/",recordRouter)
-app.use("/",homeRouter,latestRouter)
+app.use("/",latestRouter)
 
 connectDB()
     .then(()=>{
