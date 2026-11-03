@@ -1,7 +1,6 @@
 import Latest from "../models/Latest.js";
 import Stats from "../models/Stats.js";
 import Records from "../models/Records.js";
-import teams from "../models/teams.js";
 import axios from "axios";
 
 const upadateData = async() => {

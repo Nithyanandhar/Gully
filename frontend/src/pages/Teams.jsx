@@ -13,22 +13,24 @@ const Teams = () => {
 
 
     useEffect(()=>{
+        async function getTeams(){
+            const response = await axios.get("http://localhost:3000/teams/");
+               
+            const teamData = response.data.data.data.data;
+           
+            setteams(teamData.data);
+            
+            const clubs = teamData.data.filter((team)=>{
+                return team.type ==="club"
+            })
+            setclubTeams(clubs)
+          
+            
+            setinternationalTeams(teamData.data.filter((team)=>team.type === "international"))
+            
+        }
         getTeams();
     },[])
-    async function getTeams(){
-        const response = await axios.get("http://localhost:3000/teams/");
-           
-        const teamData = response.data.data.data.data;
-        setteams(teamData);
-
-        const clubs = teamData.filter((team)=>{
-            return team.type ==="club"
-        })
-        setclubTeams(clubs)
-    
-        setinternationalTeams(teamData.filter((team)=>team.type === "international"))
-        
-    }
     async function handleSearch(event){
         try{
             event.preventDefault();
@@ -49,59 +51,11 @@ const Teams = () => {
     return (
         <>
             <NavBar/>
-            {/* <div>
-                <h1>TEAMS</h1>
-                <div>
-                    <h2>International Teams</h2>
-                    <form onSubmit={(e)=>handleSearch(e)}>
-                        <input type='text' name="team" placeholder='Enter a team'/>
-                        <button >Search</button>
-                    
-                    </form>
-                </div>
-                
-            </div>
-            <div>
-                {
-                    clubTeams &&
-                        <div>
-                            <h1>Clubs</h1>
-                            <div>{clubTeams.slice(0, 10).map((item, index) => (
-                                <div key={index}>
-                                    <p>{item.name}</p>
-                                    <p>{item.matches}</p>
-
-                                </div>
-                            ))              
-                            }
-                            </div>
-                        </div>
-                }
-            </div>
-            <div>
-                {
-                    internationalTeams &&
-                        <div>
-                            <h1>International</h1>
-                            <div>{internationalTeams.slice(0, 10).map((item, index) => (
-                                <div key={index}>
-                                    <p>{item.name}</p>
-                                    <p>{item.matches}</p>
-
-                                </div>
-                            ))              
-                            }
-                            </div>
-                        </div>
-                }
-            </div> */}
-
 
             <div className="min-h-screen bg-slate-950 text-white px-4 sm:px-8 py-10">
 
                 <div className="max-w-7xl mx-auto">
 
-                    {/* Page Heading */}
                     <div className="mb-10">
                         <h1 className="text-4xl font-extrabold tracking-tight">
                             Teams<span className="text-blue-500">.</span>
@@ -111,7 +65,6 @@ const Teams = () => {
                         </p>
                     </div>
 
-                    {/* International Team Search */}
                     <div className="bg-slate-900 border border-slate-800 rounded-2xl p-6 mb-12">
                         <h2 className="text-xl font-bold mb-5">
                             Find a Team
@@ -135,54 +88,7 @@ const Teams = () => {
                         </form>
                     </div>
                     
-                    {/* {team &&  */}
-                        {/* <div>
-                            <p>{team.data.name}</p>
-                            {/* <p>{team.data.record}</p> */}
-                            {/* <div>
-                                <p>Player who played most matches</p>
-                                <div>
-                                    {
-                                        team.data.most_matches.map((player)=>(
-                                            <div key={player.name}>
-                                                <p>{player.name}</p>
-                                                <p>{player.matches}</p>
-
-                                            </div>
-                                        ))
-                                    }
-                                </div>
-                            </div> */}
-                            {/* <div>
-                                <div>Records</div>
-                                {
-                                    Object.keys(team.data.record).map(key => (
-                                        <div key={key}>
-                                            <h3>{key}</h3>
-
-                                            <p>played :{team.data.record[key].played}</p>
-                                            <p>won :{team.data.record[key].won}</p>
-                                            <p>lost :{team.data.record[key].lost}</p>
-                                        </div>
-                                    ))
-                                }
-
-                            </div> */}
-                            {/* <div>
-                                <div>Competitions</div>
-                                {
-                                    team.data.competitions.map((competition)=>(
-                                        <div key={competition.competition}>
-                                            <p>{competition.name}</p>
-                                            <p>{competition.matches}</p>
-                                        </div>
-                                    ))
-                                }
-
-                            </div> */}
-
-                        {/* </div> */} 
-                    {/* } */}
+            
                     {team && 
                         <div className="max-w-6xl mx-auto p-4 sm:p-6 space-y-8">
 
@@ -261,7 +167,6 @@ const Teams = () => {
                         </p>
                     }
 
-                    {/* Club Teams */}
                     <div className="mb-14">
 
                         <div className="flex items-center justify-between mb-6">
@@ -285,6 +190,7 @@ const Teams = () => {
                                         key={index}
                                         className="bg-slate-900 border border-slate-800 rounded-xl p-5 hover:border-blue-500/60 hover:bg-slate-800/70 transition duration-200 group"
                                     >
+                                       
                                         <div className="flex items-center justify-between mb-5">
                                             <div className="w-11 h-11 rounded-xl bg-blue-500/10 flex items-center justify-center text-blue-400 font-bold text-lg">
                                                 {item.name?.charAt(0)}
@@ -309,7 +215,6 @@ const Teams = () => {
                         </div>
                     </div>
 
-                    {/* International Teams */}
                     <div className="mb-10">
 
                         <div className="flex items-center justify-between mb-6">

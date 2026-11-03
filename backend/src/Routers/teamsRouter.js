@@ -1,6 +1,7 @@
 import express from "express";
 import axios from "axios"
 import Teams from "../models/Teams.js";
+import cache from "../middleware/cache.js"
 
 const teamsRouter = express.Router();
 
@@ -46,7 +47,7 @@ teamsRouter.get("/:team",async (req,res)=>{
     }
 })
 
-teamsRouter.get("/",async (req,res)=>{
+teamsRouter.get("/",cache(300),async (req,res)=>{
     try{    
         
         const key = `db:teams`

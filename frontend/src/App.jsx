@@ -8,6 +8,9 @@ import { deleteUser, setUser } from './slices/userSlice'
 import Stats from './pages/Stats'
 import Teams from './pages/Teams'
 import Records from './pages/Records'
+import Venue from './pages/Venue'
+import ScoreCard from './pages/ScoreCard'
+import Live from './pages/Live'
 
 
 const App = () => {
@@ -44,6 +47,9 @@ const App = () => {
                     <Route path = "/stats" element= {<Stats/>}/>
                     <Route path = "/teams" element= {<Teams/>}/>
                     <Route path = "/records" element= {<Records/>}/>
+                    <Route path = "/venues" element= {<Venue/>}/>
+                    <Route path = "/live" element= {<Live/>}/>
+                    <Route path = "/scorecard" element= {<ScoreCard/>}/>
                 </Routes>
 
         </BrowserRouter>

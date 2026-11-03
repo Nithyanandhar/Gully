@@ -9,6 +9,7 @@ import statsRouter from "./Routers/statsRouter.js";
 import teamsRouter from "./Routers/teamsRouter.js";
 import recordRouter from "./Routers/recordRouter.js";
 import latestRouter from "./Routers/latestRouter.js";
+import venueRouter from "./Routers/venueRouter.js";
 
 
 const app = express();
@@ -26,6 +27,7 @@ app.use("/stats/",statsRouter)
 app.use("/teams/",teamsRouter)
 app.use("/records/",recordRouter)
 app.use("/",latestRouter)
+app.use("/venues",venueRouter)
 
 connectDB()
     .then(()=>{

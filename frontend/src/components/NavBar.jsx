@@ -21,49 +21,27 @@ const NavBar = () => {
         }
     } 
     return (
-        // <div>
-        //     <div>
-        //         <div>
-        //             <div>Gully</div>
-        //             <div>
-        //                 <ul>
-        //                     <Link to="/live">Live</Link>
-        //                     <Link to="/stats">Stats</Link>
-        //                     <Link to="/teams">Teams</Link>
-        //                     <Link to="/venues">Venues</Link>
-        //                     <Link to="/records">Records</Link>
-        //                 </ul>
-        //             </div>
-        //         </div>
-        //         <div>
-        //             {
-        //                 user ?( <>
-        //                     <p>{user.username}</p> 
-        //                     <button onClick={logout}>logout</button>
-        //                 </>)
-        //                 : <Link to="/auth">Login / Signup</Link> 
-        //             }
-                    
-        //         </div>
-        //     </div>
-        // </div>
-
+   
 
 <div className="w-full bg-slate-950 border-b border-slate-800 sticky top-0 z-50">
     <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
 
         <div className="flex items-center gap-12">
 
-            {/* Logo */}
             <div className="text-2xl font-extrabold text-white tracking-tight">
                 Gully<span className="text-blue-500">.</span>
             </div>
 
-            {/* Navigation */}
             <div>
                 <ul className="flex items-center gap-8 text-sm font-medium text-slate-400">
+                    <Link to="/" className="hover:text-blue-400 transition duration-200">
+                        Home
+                    </Link>
                     <Link to="/live" className="hover:text-blue-400 transition duration-200">
                         Live
+                    </Link>
+                    <Link to="/scorecard" className="hover:text-blue-400 transition duration-200">
+                        Scorecard
                     </Link>
                     <Link to="/stats" className="hover:text-blue-400 transition duration-200">
                         Stats
@@ -81,7 +59,6 @@ const NavBar = () => {
             </div>
         </div>
 
-        {/* Authentication */}
         <div className="flex items-center gap-4 text-sm">
             {
                 user ? (
