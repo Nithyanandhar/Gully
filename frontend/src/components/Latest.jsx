@@ -5,7 +5,7 @@ const Latest = () => {
     const [latestarr, setlatestarr] = useState([])
     useEffect(()=>{
         async function fetchLatest(){
-            const response = await axios.get("http://localhost:3000/");
+            const response = await axios.get("http://localhost:8080/");
             setlatestarr(response.data.data.data.data.results)
         }
         fetchLatest();

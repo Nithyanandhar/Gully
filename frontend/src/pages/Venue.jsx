@@ -11,7 +11,7 @@ const Venue = () => {
     useEffect(()=>{
         async function fetchvenues(){
 
-            const response = await axios.get(`http://localhost:3000/venues`);
+            const response = await axios.get(`http://localhost:8080/venues`);
             const venues = response.data;
     
             setvenues(venues.data.data.data.data.data);
@@ -30,7 +30,7 @@ const Venue = () => {
             return;
         }
         
-        const response = await axios.get(`http://localhost:3000/venues/${venue}`)
+        const response = await axios.get(`http://localhost:8080/venues/${venue}`)
         
         const venueresponse = response.data;
         

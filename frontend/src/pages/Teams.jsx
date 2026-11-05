@@ -14,7 +14,7 @@ const Teams = () => {
 
     useEffect(()=>{
         async function getTeams(){
-            const response = await axios.get("http://localhost:3000/teams/");
+            const response = await axios.get("http://localhost:8080/teams/");
                
             const teamData = response.data.data.data.data;
            
@@ -35,7 +35,7 @@ const Teams = () => {
         try{
             event.preventDefault();
             const team = event.target.team.value;
-            const teamDetails =await axios.get(`http://localhost:3000/teams/${team}`)
+            const teamDetails =await axios.get(`http://localhost:8080/teams/${team}`)
             const dteam = teamDetails.data.data
             setteam(dteam);
             if(teamDetails.data.message === "Request failed with status code 404"){

@@ -13,7 +13,7 @@ const Records = () => {
         const format = e.target.format.value;
         const gender = e.target.gender.value;
       
-        const response = await axios.post("http://localhost:3000/records",
+        const response = await axios.post("http://localhost:8080/records",
             {
                 ...(format && {"format" : format}),
                 ...(type && {"type" : type}),

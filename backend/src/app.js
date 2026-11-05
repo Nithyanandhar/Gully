@@ -1,6 +1,5 @@
 import express from "express";
 import "dotenv/config.js"
-import connectDB from "./config/db.js";
 import authRouter from "./Routers/authRouter.js";
 import cookieParser from "cookie-parser"
 import cors from "cors";
@@ -10,6 +9,8 @@ import teamsRouter from "./Routers/teamsRouter.js";
 import recordRouter from "./Routers/recordRouter.js";
 import latestRouter from "./Routers/latestRouter.js";
 import venueRouter from "./Routers/venueRouter.js";
+import matchRouter from "./Routers/matchRouter.js";
+import commentsRouter from "./Routers/commentsRouter.js";
 
 
 const app = express();
@@ -28,13 +29,7 @@ app.use("/teams/",teamsRouter)
 app.use("/records/",recordRouter)
 app.use("/",latestRouter)
 app.use("/venues",venueRouter)
+app.use("/matches",matchRouter)
+app.use("/comments",commentsRouter)
 
-connectDB()
-    .then(()=>{
-        app.listen(3000, ()=>{
-            console.log("hello")
-        })
-    })
-    .catch((error)=>{
-        console.log("error while connecting to the DB", error)
-    })
+export default app;

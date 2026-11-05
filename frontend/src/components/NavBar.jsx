@@ -37,12 +37,10 @@ const NavBar = () => {
                     <Link to="/" className="hover:text-blue-400 transition duration-200">
                         Home
                     </Link>
-                    <Link to="/live" className="hover:text-blue-400 transition duration-200">
+                    <Link to="/matches" className="hover:text-blue-400 transition duration-200">
                         Live
                     </Link>
-                    <Link to="/scorecard" className="hover:text-blue-400 transition duration-200">
-                        Scorecard
-                    </Link>
+                
                     <Link to="/stats" className="hover:text-blue-400 transition duration-200">
                         Stats
                     </Link>
